@@ -1,0 +1,23 @@
+name: 'Close Stale Issues and PRs'
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: 'This issue has been automatically marked as stale.'
+          stale-pr-message: 'This pull request has been automatically marked as stale.'
+          days-before-stale: 29
+          days-before-close: 1
+          stale-issue-label: 'stale'
+          exempt-issue-labels: 'do not stale'
+          exempt-pr-labels: 'dependencies'
+          exempt-draft-pr: false
+          remove-stale-when-updated: true
+          delete-branch: false
